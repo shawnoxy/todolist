@@ -1,0 +1,23 @@
+extends layouts/mainLayout.pug
+
+block title
+    title Todo List
+
+block links
+    link(rel="stylesheet", href="css/styles.css")
+
+block content
+    .box#heading
+        h1 #{listTitle}
+    .box
+        if items.length > 0 
+            for item in items
+                form(action="/delete" method="POST")
+                    .item   
+                        input(type="checkbox" value=item._id name="delItem" onChange="this.form.submit()")
+                        p #{item.name}
+                        input(type="hidden" value=listTitle name="listTitle")
+            form(action="/" method="POST").item.name
+                input(type="text", name="newItem", placeholder="New Item", autocomplete="off")
+                button(type="submit", name="listTitle" value=listTitle) +
+                
